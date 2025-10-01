@@ -1,7 +1,6 @@
 *** Settings ***
 Resource    data_generation.robot
 Resource    variables.robot
-Resource    ../common/session.robot
 
 *** Keywords ***
 Configurar Dados Iniciais Para Testes
