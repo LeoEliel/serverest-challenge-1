@@ -3,7 +3,6 @@ Library    RequestsLibrary
 Library          Collections
 Library          String
 Library          JSONLibrary
-Resource        ../common/session.robot    # Importa as keywords de sessão
 
 *** Variables ***
 ${BASE_URL}             http://localhost:3000

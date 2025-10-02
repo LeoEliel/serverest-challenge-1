@@ -1,5 +1,6 @@
 *** Settings ***
 Library    FakerLibrary
+Library    JSONLibrary
 Library    Collections
 
 *** Variables ***
@@ -17,7 +18,7 @@ Gerar Dados Usuario
     ${nome}=    FakerLibrary.Name
     ${email}=   FakerLibrary.Email
     ${password}=    FakerLibrary.Password    length=8
-    ${administrador}=    Set Variable If    ${admin}    true    false
+    ${administrador}=    Set Variable If    ${admin}    "true"    "false"
     
     ${usuario_data}=    Create Dictionary
     ...    nome=${nome}
@@ -102,7 +103,7 @@ Obter Dados Usuario Admin Estatico
     ...    nome=${ADMIN_NAME}
     ...    email=${ADMIN_EMAIL}
     ...    password=${ADMIN_PASSWORD}
-    ...    administrador=true
+    ...    administrador="true"
     
     RETURN    ${admin_data}
 
@@ -111,7 +112,7 @@ Obter Dados Usuario Comum Estatico
     ...    nome=${USER_NAME}
     ...    email=${USER_EMAIL}
     ...    password=${USER_PASSWORD}
-    ...    administrador=false
+    ...    administrador="false"
     
     RETURN    ${user_data}
 

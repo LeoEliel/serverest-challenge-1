@@ -1,6 +1,8 @@
 *** Settings ***
+Library    JSONLibrary
 Resource    data_generation.robot
 Resource    variables.robot
+Resource    ../common/session.robot
 
 *** Keywords ***
 Configurar Dados Iniciais Para Testes
@@ -52,3 +54,8 @@ Obter Dados Para Login
     ...    ELSE
     ...    Obter Credenciais Login Usuario
     RETURN    ${login_data}
+
+Setup Completo Da Suite
+    [Documentation]    Executa setup completo para a suite de testes
+    Criar Sessão
+    Configurar Dados Iniciais Para Testes

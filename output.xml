@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.12.1 on win32)" generated="2025-10-02T13:07:47.593308" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="c:\Users\leoel\Documents\www\compass\semana_8\serverest-challenge-1\test\tests.robot">
+<kw name="Criar Sessão" owner="session" type="SETUP">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-10-02T13:07:49.036522" level="INFO">Creating Session using : alias=serveRest, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>serveRest</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-10-02T13:07:49.036522" elapsed="0.004237"/>
+</kw>
+<status status="PASS" start="2025-10-02T13:07:49.034999" elapsed="0.005760"/>
+</kw>
+<test id="s1-t1" name="KAN-1 - Login com Credenciais Válidas (Admin)" line="10">
+<kw name="Dado que existe um Usuário Admin pré-cadastrado" owner="keywords">
+<kw name="Configurar Dados Iniciais Para Testes" owner="setup_helper">
+<kw name="Verificar Se Setup Foi Concluido" owner="variables">
+<return>
+<value>${SETUP_COMPLETED}</value>
+<status status="PASS" start="2025-10-02T13:07:49.043756" elapsed="0.000998"/>
+</return>
+<msg time="2025-10-02T13:07:49.044754" level="INFO">${setup_done} = False</msg>
+<var>${setup_done}</var>
+<status status="PASS" start="2025-10-02T13:07:49.043756" elapsed="0.002510"/>
+</kw>
+<kw name="Return From Keyword If" owner="BuiltIn">
+<arg>${setup_done}</arg>
+<doc>Returns from the enclosing user keyword if ``condition`` is true.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.046266" elapsed="0.000000"/>
+</kw>
+<kw name="Obter Dados Usuario Admin Estatico" owner="data_generation">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-02T13:07:49.050351" level="INFO">${admin_data} = {'nome': 'Admin Teste', 'email': 'admin@teste.com', 'password': 'admin123', 'administrador': 'true'}</msg>
+<var>${admin_data}</var>
+<arg>nome=${ADMIN_NAME}</arg>
+<arg>email=${ADMIN_EMAIL}</arg>
+<arg>password=${ADMIN_PASSWORD}</arg>
+<arg>administrador=true</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.049354" elapsed="0.001995"/>
+</kw>
+<return>
+<value>${admin_data}</value>
+<status status="PASS" start="2025-10-02T13:07:49.051349" elapsed="0.001004"/>
+</return>
+<msg time="2025-10-02T13:07:49.052353" level="INFO">${admin_data} = {'nome': 'Admin Teste', 'email': 'admin@teste.com', 'password': 'admin123', 'administrador': 'true'}</msg>
+<var>${admin_data}</var>
+<status status="PASS" start="2025-10-02T13:07:49.047279" elapsed="0.005074"/>
+</kw>
+<kw name="Armazenar Dados Usuario Admin" owner="variables">
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-02T13:07:49.054348" level="INFO">${GLOBAL_ADMIN_DATA} = {'nome': 'Admin Teste', 'email': 'admin@teste.com', 'password': 'admin123', 'administrador': 'true'}</msg>
+<arg>${GLOBAL_ADMIN_DATA}</arg>
+<arg>${user_data}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.053351" elapsed="0.000997"/>
+</kw>
+<arg>${admin_data}</arg>
+<status status="PASS" start="2025-10-02T13:07:49.053351" elapsed="0.002003"/>
+</kw>
+<kw name="Obter Dados Usuario Comum Estatico" owner="data_generation">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-02T13:07:49.056872" level="INFO">${user_data} = {'nome': 'Usuario Teste', 'email': 'user@teste.com', 'password': 'user123', 'administrador': 'false'}</msg>
+<var>${user_data}</var>
+<arg>nome=${USER_NAME}</arg>
+<arg>email=${USER_EMAIL}</arg>
+<arg>password=${USER_PASSWORD}</arg>
+<arg>administrador=false</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.056351" elapsed="0.001038"/>
+</kw>
+<return>
+<value>${user_data}</value>
+<status status="PASS" start="2025-10-02T13:07:49.057389" elapsed="0.000000"/>
+</return>
+<msg time="2025-10-02T13:07:49.057389" level="INFO">${user_data} = {'nome': 'Usuario Teste', 'email': 'user@teste.com', 'password': 'user123', 'administrador': 'false'}</msg>
+<var>${user_data}</var>
+<status status="PASS" start="2025-10-02T13:07:49.055354" elapsed="0.003047"/>
+</kw>
+<kw name="Armazenar Dados Usuario Comum" owner="variables">
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-02T13:07:49.059077" level="INFO">${GLOBAL_USER_DATA} = {'nome': 'Usuario Teste', 'email': 'user@teste.com', 'password': 'user123', 'administrador': 'false'}</msg>
+<arg>${GLOBAL_USER_DATA}</arg>
+<arg>${user_data}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.059077" elapsed="0.001018"/>
+</kw>
+<arg>${user_data}</arg>
+<status status="PASS" start="2025-10-02T13:07:49.058401" elapsed="0.001694"/>
+</kw>
+<kw name="Gerar Dados Produto" owner="data_generation">
+<kw name="Word" owner="FakerLibrary">
+<msg time="2025-10-02T13:07:49.061124" level="INFO">${nome} = sport</msg>
+<var>${nome}</var>
+<doc>Generate a word.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.061124" elapsed="0.000000"/>
+</kw>
+<kw name="Random Int" owner="FakerLibrary">
+<msg time="2025-10-02T13:07:49.062087" level="INFO">${preco} = 1632</msg>
+<var>${preco}</var>
+<arg>min=10</arg>
+<arg>max=5000</arg>
+<doc>Generate a random integer between two integers ``min`` and ``max`` inclusive
+while observing the provided ``step`` value.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.062087" elapsed="0.000000"/>
+</kw>
+<kw name="Sentence" owner="FakerLibrary">
+<msg time="2025-10-02T13:07:49.063595" level="INFO">${descricao} = Enter gas watch.</msg>
+<var>${descricao}</var>
+<arg>nb_words=3</arg>
+<doc>Generate a sentence.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.063595" elapsed="0.000000"/>
+</kw>
+<kw name="Random Int" owner="FakerLibrary">
+<msg time="2025-10-02T13:07:49.065606" level="INFO">${quantidade} = 892</msg>
+<var>${quantidade}</var>
+<arg>min=1</arg>
+<arg>max=1000</arg>
+<doc>Generate a random integer between two integers ``min`` and ``max`` inclusive
+while observing the provided ``step`` value.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.064636" elapsed="0.000970"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-02T13:07:49.067129" level="INFO">${produto_data} = {'nome': 'sport', 'preco': 1632, 'descricao': 'Enter gas watch.', 'quantidade': 892}</msg>
+<var>${produto_data}</var>
+<arg>nome=${nome}</arg>
+<arg>preco=${preco}</arg>
+<arg>descricao=${descricao}</arg>
+<arg>quantidade=${quantidade}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.065606" elapsed="0.001523"/>
+</kw>
+<return>
+<value>${produto_data}</value>
+<status status="PASS" start="2025-10-02T13:07:49.067129" elapsed="0.001065"/>
+</return>
+<msg time="2025-10-02T13:07:49.068194" level="INFO">${produto_data} = {'nome': 'sport', 'preco': 1632, 'descricao': 'Enter gas watch.', 'quantidade': 892}</msg>
+<var>${produto_data}</var>
+<status status="PASS" start="2025-10-02T13:07:49.060095" elapsed="0.009048"/>
+</kw>
+<kw name="Armazenar Dados Produto" owner="variables">
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-02T13:07:49.070144" level="INFO">${GLOBAL_PRODUTO_DATA} = {'nome': 'sport', 'preco': 1632, 'descricao': 'Enter gas watch.', 'quantidade': 892}</msg>
+<arg>${GLOBAL_PRODUTO_DATA}</arg>
+<arg>${produto_data}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.070144" elapsed="0.000000"/>
+</kw>
+<arg>${produto_data}</arg>
+<status status="PASS" start="2025-10-02T13:07:49.069143" elapsed="0.001001"/>
+</kw>
+<kw name="Gerar Dados Produto" owner="data_generation">
+<kw name="Word" owner="FakerLibrary">
+<msg time="2025-10-02T13:07:49.071163" level="INFO">${nome} = generation</msg>
+<var>${nome}</var>
+<doc>Generate a word.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.071163" elapsed="0.000000"/>
+</kw>
+<kw name="Random Int" owner="FakerLibrary">
+<msg time="2025-10-02T13:07:49.072158" level="INFO">${preco} = 630</msg>
+<var>${preco}</var>
+<arg>min=10</arg>
+<arg>max=5000</arg>
+<doc>Generate a random integer between two integers ``min`` and ``max`` inclusive
+while observing the provided ``step`` value.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.071163" elapsed="0.000995"/>
+</kw>
+<kw name="Sentence" owner="FakerLibrary">
+<msg time="2025-10-02T13:07:49.072158" level="INFO">${descricao} = Themselves type somebody pay.</msg>
+<var>${descricao}</var>
+<arg>nb_words=3</arg>
+<doc>Generate a sentence.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.072158" elapsed="0.000000"/>
+</kw>
+<kw name="Random Int" owner="FakerLibrary">
+<msg time="2025-10-02T13:07:49.073151" level="INFO">${quantidade} = 89</msg>
+<var>${quantidade}</var>
+<arg>min=1</arg>
+<arg>max=1000</arg>
+<doc>Generate a random integer between two integers ``min`` and ``max`` inclusive
+while observing the provided ``step`` value.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.072158" elapsed="0.000993"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-02T13:07:49.073151" level="INFO">${produto_data} = {'nome': 'generation', 'preco': 630, 'descricao': 'Themselves type somebody pay.', 'quantidade': 89}</msg>
+<var>${produto_data}</var>
+<arg>nome=${nome}</arg>
+<arg>preco=${preco}</arg>
+<arg>descricao=${descricao}</arg>
+<arg>quantidade=${quantidade}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.073151" elapsed="0.000000"/>
+</kw>
+<return>
+<value>${produto_data}</value>
+<status status="PASS" start="2025-10-02T13:07:49.074151" elapsed="0.000000"/>
+</return>
+<msg time="2025-10-02T13:07:49.074151" level="INFO">${produto_data_2} = {'nome': 'generation', 'preco': 630, 'descricao': 'Themselves type somebody pay.', 'quantidade': 89}</msg>
+<var>${produto_data_2}</var>
+<status status="PASS" start="2025-10-02T13:07:49.071163" elapsed="0.002988"/>
+</kw>
+<kw name="Armazenar Dados Produto Secundario" owner="variables">
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-02T13:07:49.075141" level="INFO">${GLOBAL_PRODUTO_DATA_2} = {'nome': 'generation', 'preco': 630, 'descricao': 'Themselves type somebody pay.', 'quantidade': 89}</msg>
+<arg>${GLOBAL_PRODUTO_DATA_2}</arg>
+<arg>${produto_data}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.075141" elapsed="0.000000"/>
+</kw>
+<arg>${produto_data_2}</arg>
+<status status="PASS" start="2025-10-02T13:07:49.074151" elapsed="0.000990"/>
+</kw>
+<kw name="Marcar Setup Como Concluido" owner="variables">
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-02T13:07:49.075141" level="INFO">${SETUP_COMPLETED} = True</msg>
+<arg>${SETUP_COMPLETED}</arg>
+<arg>${TRUE}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.075141" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-10-02T13:07:49.075141" elapsed="0.001534"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-02T13:07:49.076675" level="INFO">Dados iniciais configurados com sucesso</msg>
+<arg>Dados iniciais configurados com sucesso</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-02T13:07:49.076675" elapsed="0.000000"/>
+</kw>
+<doc>Configura dados iniciais necessários para execução dos testes</doc>
+<status status="PASS" start="2025-10-02T13:07:49.042758" elapsed="0.033917"/>
+</kw>
+<kw name="Obter Dados Usuario Admin" owner="variables">
+<return>
+<value>${GLOBAL_ADMIN_DATA}</value>
+<status status="PASS" start="2025-10-02T13:07:49.077212" elapsed="0.000000"/>
+</return>
+<msg time="2025-10-02T13:07:49.077212" level="INFO">${admin_data} = {'nome': 'Admin Teste', 'email': 'admin@teste.com', 'password': 'admin123', 'administrador': 'true'}</msg>
+<var>${admin_data}</var>
+<status status="PASS" start="2025-10-02T13:07:49.077212" elapsed="0.001625"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-02T13:07:49.080848" level="FAIL">Resolving variable '${RESPONSE.json()}' failed: AttributeError: 'str' object has no attribute 'json'</msg>
+<var>${admin_id}</var>
+<arg>${RESPONSE.json()}</arg>
+<arg>_id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="FAIL" start="2025-10-02T13:07:49.078837" elapsed="0.005012">Resolving variable '${RESPONSE.json()}' failed: AttributeError: 'str' object has no attribute 'json'</status>
+</kw>
+<kw name="Armazenar ID Usuario Admin" owner="variables">
+<arg>${admin_id}</arg>
+<status status="NOT RUN" start="2025-10-02T13:07:49.083849" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2025-10-02T13:07:49.041758" elapsed="0.043092">Resolving variable '${RESPONSE.json()}' failed: AttributeError: 'str' object has no attribute 'json'</status>
+</kw>
+<kw name="Quando eu envio POST para a rota /login com credenciais válidas" owner="keywords">
+<status status="NOT RUN" start="2025-10-02T13:07:49.086364" elapsed="0.000000"/>
+</kw>
+<kw name="Então o status code é 200" owner="keywords">
+<status status="NOT RUN" start="2025-10-02T13:07:49.087890" elapsed="0.000000"/>
+</kw>
+<kw name="E a mensagem é &quot;Login realizado com sucesso&quot;" owner="keywords">
+<status status="NOT RUN" start="2025-10-02T13:07:49.089403" elapsed="0.001041"/>
+</kw>
+<kw name="E a resposta contém o campo authorization" owner="keywords">
+<status status="NOT RUN" start="2025-10-02T13:07:49.091412" elapsed="0.000000"/>
+</kw>
+<tag>Alta</tag>
+<tag>KAN-1</tag>
+<tag>Login</tag>
+<status status="FAIL" start="2025-10-02T13:07:49.040759" elapsed="0.051656">Resolving variable '${RESPONSE.json()}' failed: AttributeError: 'str' object has no attribute 'json'</status>
+</test>
+<kw name="Delete All Sessions" owner="RequestsLibrary" type="TEARDOWN">
+<msg time="2025-10-02T13:07:49.094417" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects</doc>
+<status status="PASS" start="2025-10-02T13:07:49.094417" elapsed="0.000999"/>
+</kw>
+<doc>Suite de Testes de Prioridade Alta para a API ServeRest.</doc>
+<status status="FAIL" start="2025-10-02T13:07:47.604438" elapsed="1.490978"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1" skip="0">Alta</stat>
+<stat pass="0" fail="1" skip="0">KAN-1</stat>
+<stat pass="0" fail="1" skip="0">Login</stat>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="0" fail="1" skip="0">Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
