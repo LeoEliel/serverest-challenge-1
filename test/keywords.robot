@@ -15,7 +15,7 @@ ${RESPONSE}    ${EMPTY}
 Dado que existe um Usuário Admin pré-cadastrado
     [Tags]    KAN-1
     ${admin_id}=    Obter ID Usuario Admin
-    Run Keyword If    '${admin_id}' == '${EMPTY}'
+        Run Keyword And Continue On Failure    Run Keyword If    '${admin_id}' == ''
     ...    Run Keywords
     ...    Dado que eu possuo dados únicos para um novo usuário Administrador    AND
     ...    Quando eu envio POST para /usuarios com "administrador": "true"
@@ -48,8 +48,10 @@ Quando eu envio POST para /usuarios com "administrador": "true"
     ${user_id}=    Get Value From Json    ${json_response}    $._id
     Armazenar Response    ${response}
     Armazenar ID Usuario Admin    ${user_id[0]}
-    Set Global Variable    ${ADMIN_EMAIL}    ${data.email}    
-    Set Global Variable    ${ADMIN_PASSWORD}    ${data.password}
+    ${email}=    Get From Dictionary    ${data}    email
+    ${password}=    Get From Dictionary    ${data}    password
+    Set Global Variable    ${ADMIN_EMAIL}    ${email}
+    Set Global Variable    ${ADMIN_PASSWORD}    ${password}
 
 Dado que eu possuo dados únicos para um novo usuário comum
     [Tags]    KAN-29
@@ -64,15 +66,15 @@ Quando eu envio POST para /usuarios com "administrador": "false"
     ${user_id}=    Get Value From Json    ${json_response}    $._id
     Armazenar Response    ${response}
     Armazenar ID Usuario Comum    ${user_id[0]}
-    Set Global Variable    ${USER_EMAIL}    ${data.email}
-    Set Global Variable    ${USER_PASSWORD}    ${data.password}
+    ${email}=    Get From Dictionary    ${data}    email
+    ${password}=    Get From Dictionary    ${data}    password
+    Set Global Variable    ${USER_EMAIL}    ${email}
+    Set Global Variable    ${USER_PASSWORD}    ${password}
 
 # KAN-6 Keywords
 Dado que um usuário foi cadastrado com sucesso e seu _id foi salvo
     [Tags]    KAN-6
-    ${user_id}=    Obter ID Usuario Admin
-    Run Keyword If    '${user_id}' == '${EMPTY}'
-    ...    Run Keywords
+    Run Keyword And Continue On Failure    Run Keywords
     ...    Dado que eu possuo dados únicos para um novo usuário Administrador    AND
     ...    Quando eu envio POST para /usuarios com "administrador": "true"
     ${user_id}=    Obter ID Usuario Admin
@@ -87,21 +89,19 @@ Quando eu envio GET para a rota /usuarios/_id com o _id salvo
 # KAN-15 Keywords
 Dado que o _id de um usuário sem carrinho foi salvo
     [Tags]    KAN-15
-    ${user_id}=    Obter ID Usuario Admin
-    Run Keyword If    '${user_id}' == '${EMPTY}'
-    ...    Run Keywords
+    Run Keyword And Continue On Failure    Run Keywords
     ...    Dado que eu possuo dados únicos para um novo usuário Administrador    AND
     ...    Quando eu envio POST para /usuarios com "administrador": "true"
     ${user_id}=    Obter ID Usuario Admin
     Should Not Be Empty    ${user_id}
 
 Dado que o Token Admin é válido
-    [Tags]    KAN-15    KAN-18
-    ${admin_id}=    Obter ID Usuario Admin
-    Run Keyword If    '${admin_id}' == '${EMPTY}'
-    ...    Run Keywords
+    [Tags]    KAN-15    KAN-18    KAN-29    KAN-37    KAN-40
+    # Sempre executar criação do admin
+    Run Keyword And Continue On Failure    Run Keywords
     ...    Dado que eu possuo dados únicos para um novo usuário Administrador    AND
     ...    Quando eu envio POST para /usuarios com "administrador": "true"
+    
     ${login_data}=    Obter Dados Para Login    admin
     ${response}=    POST On Session    serverest    /login    json=${login_data}    expected_status=200    msg=Falha ao obter token admin
     ${json_response}=    Convert String To Json    ${response.text}
@@ -130,9 +130,8 @@ Quando eu envio POST para /produtos com Token e dados de produto únicos
 # KAN-29 Keywords
 Dado que o Token do usuário é válido
     [Tags]    KAN-29    KAN-37    KAN-40
-    ${user_id}=    Obter ID Usuario Comum
-    Run Keyword If    '${user_id}' == '${EMPTY}'
-    ...    Run Keywords
+    # Sempre executar criação do usuário comum
+    Run Keyword And Continue On Failure    Run Keywords
     ...    Dado que eu possuo dados únicos para um novo usuário comum    AND
     ...    Quando eu envio POST para /usuarios com "administrador": "false"
     ${login_data}=    Obter Dados Para Login    usuario
@@ -140,13 +139,12 @@ Dado que o Token do usuário é válido
     ${json_response}=    Convert String To Json    ${response.text}
     ${token}=    Get Value From Json    ${json_response}    $.authorization
     Armazenar Token Usuario    ${token[0]}
-    Set Test Variable    ${AUTH_HEADERS}    {"Authorization": "${token[0]}"}
+    Set Test Variable    ${AUTH_HEADERS}    "Authorization": "${token[0]}"
 
 E o idProduto existe com quantidade em estoque suficiente
     [Tags]    KAN-29
-    ${produto_id}=    Obter ID Produto
-    Run Keyword If    '${produto_id}' == '${EMPTY}'
-    ...    Quando eu envio POST para /produtos com Token e dados de produto únicos
+    # Sempre executar criação do produto
+    Run Keyword And Continue On Failure    Quando eu envio POST para /produtos com Token e dados de produto únicos
     ${produto_id}=    Obter ID Produto
     Should Not Be Empty    ${produto_id}
 
@@ -203,9 +201,8 @@ Quando eu envio POST para /carrinhos com Token e dados válidos
 # KAN-37 Keywords
 E o usuário possui um carrinho ativo
     [Tags]    KAN-37
-    ${carrinho_id}=    Obter ID Carrinho
-    Run Keyword If    '${carrinho_id}' == '${EMPTY}'
-    ...    Run Keywords
+    # Sempre executar criação do carrinho
+    Run Keyword And Continue On Failure    Run Keywords
     ...    E o idProduto existe com quantidade em estoque suficiente    AND
     ...    Quando eu envio POST para /carrinhos com Token e dados válidos
     ${carrinho_id}=    Obter ID Carrinho
@@ -221,9 +218,8 @@ Quando eu envio DELETE para /carrinhos/concluir-compra com Token
 # KAN-40 Keywords
 E o usuário possui um carrinho ativo com produtos
     [Tags]    KAN-40
-    ${carrinho_id}=    Obter ID Carrinho
-    Run Keyword If    '${carrinho_id}' == '${EMPTY}'
-    ...    Run Keywords
+    # Sempre executar criação do carrinho
+    Run Keyword And Continue On Failure    Run Keywords
     ...    E o idProduto existe com quantidade em estoque suficiente    AND
     ...    Quando eu envio POST para /carrinhos com Token e dados válidos
     ${carrinho_id}=    Obter ID Carrinho
