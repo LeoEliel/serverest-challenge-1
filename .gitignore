@@ -1,5 +1,3 @@
-Com certeza! Você pode copiar e colar o conteúdo abaixo diretamente no seu arquivo .gitignore. Ele está otimizado para ambientes Python e projetos Robot Framework, ignorando logs, relatórios e ambientes virtuais.
-
 # Arquivos e diretórios gerados pelo Python
 __pycache__/
 *.pyc
@@ -13,27 +11,19 @@ build/
 dist/
 
 # Arquivos de IDEs e Ferramentas Comuns
-.idea/             # IntelliJ/PyCharm
-.vscode/           # VS Code
+.idea/
+.vscode/
 *.sublime-workspace
 *.swp
 
-# Arquivos de Configuração de Segurança (Secrets)
-# Se você usar variáveis de ambiente ou secrets, liste os arquivos aqui.
-# Exemplo:
-# .env
-
 # Arquivos gerados pelo Robot Framework
 *.log
-*.html             # Relatórios gerados (log.html, report.html)
-*.xml              # Arquivos de output xUnit/Junit
-*.json             # Arquivos de output que não são essenciais
-output/            # Diretório padrão de saída do Robot
-test_results/      # Diretório comum para resultados de execução
+*.html
+*.xml
+output/
+test_results/
+log/
 
 # Arquivos de dados temporários e caches
 *.db
 .cache/
-
-# Miscellaneous
-./reports
