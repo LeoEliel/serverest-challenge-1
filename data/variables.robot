@@ -8,6 +8,13 @@ ${GLOBAL_USER_ID}          ${EMPTY}
 # Product IDs
 ${GLOBAL_PRODUTO_ID}       ${EMPTY}
 ${GLOBAL_PRODUTO_ID_2}     ${EMPTY}
+${GLOBAL_PRODUTO_1_ID}     ${EMPTY}
+${GLOBAL_PRODUTO_2_ID}     ${EMPTY}
+
+# Product Initial Quantities
+${GLOBAL_QTD_INICIAL_1}    ${EMPTY}
+${GLOBAL_QTD_INICIAL_2}    ${EMPTY}
+${GLOBAL_QTD_INICIAL}      ${EMPTY}
 
 # Cart IDs
 ${GLOBAL_CARRINHO_ID}      ${EMPTY}
@@ -24,11 +31,10 @@ ${GLOBAL_USER_DATA}        ${EMPTY}
 ${GLOBAL_PRODUTO_DATA}     ${EMPTY}
 ${GLOBAL_PRODUTO_DATA_2}   ${EMPTY}
 
-# Test Execution Control
-${SETUP_COMPLETED}         ${FALSE}
-
 # API Response Storage
 ${GLOBAL_RESPONSE}         ${EMPTY}
+# Test Execution Control
+${SETUP_COMPLETED}         ${FALSE}
 
 *** Keywords ***
 Armazenar ID Usuario Admin
@@ -50,6 +56,31 @@ Armazenar ID Produto Secundario
     [Arguments]    ${produto_id}
     Set Global Variable    ${GLOBAL_PRODUTO_ID_2}    ${produto_id}
     Log To Console    GLOBAL_PRODUTO_ID_2 definido como: ${produto_id}
+
+Armazenar ID Produto 1
+    [Arguments]    ${produto_id}
+    Set Global Variable    ${GLOBAL_PRODUTO_1_ID}    ${produto_id}
+    Log To Console    GLOBAL_PRODUTO_1_ID definido como: ${produto_id}
+
+Armazenar ID Produto 2
+    [Arguments]    ${produto_id}
+    Set Global Variable    ${GLOBAL_PRODUTO_2_ID}    ${produto_id}
+    Log To Console    GLOBAL_PRODUTO_2_ID definido como: ${produto_id}
+
+Armazenar Quantidade Inicial Produto 1
+    [Arguments]    ${quantidade}
+    Set Global Variable    ${GLOBAL_QTD_INICIAL_1}    ${quantidade}
+    Log To Console    GLOBAL_QTD_INICIAL_1 definido como: ${quantidade}
+
+Armazenar Quantidade Inicial Produto 2
+    [Arguments]    ${quantidade}
+    Set Global Variable    ${GLOBAL_QTD_INICIAL_2}    ${quantidade}
+    Log To Console    GLOBAL_QTD_INICIAL_2 definido como: ${quantidade}
+
+Armazenar Quantidade Inicial
+    [Arguments]    ${quantidade}
+    Set Global Variable    ${GLOBAL_QTD_INICIAL}    ${quantidade}
+    Log To Console    GLOBAL_QTD_INICIAL definido como: ${quantidade}
 
 Armazenar ID Carrinho
     [Arguments]    ${carrinho_id}
@@ -106,6 +137,21 @@ Obter ID Produto
 
 Obter ID Produto Secundario
     RETURN    ${GLOBAL_PRODUTO_ID_2}
+
+Obter ID Produto 1
+    RETURN    ${GLOBAL_PRODUTO_1_ID}
+
+Obter ID Produto 2
+    RETURN    ${GLOBAL_PRODUTO_2_ID}
+
+Obter Quantidade Inicial Produto 1
+    RETURN    ${GLOBAL_QTD_INICIAL_1}
+
+Obter Quantidade Inicial Produto 2
+    RETURN    ${GLOBAL_QTD_INICIAL_2}
+
+Obter Quantidade Inicial
+    RETURN    ${GLOBAL_QTD_INICIAL}
 
 Obter ID Carrinho
     RETURN    ${GLOBAL_CARRINHO_ID}

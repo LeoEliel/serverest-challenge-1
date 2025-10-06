@@ -30,14 +30,15 @@ Configurar Dados Iniciais Para Testes
     # Marca setup como concluído
     Marcar Setup Como Concluido
     
-    Log    Dados iniciais configurados com sucesso
+    Log    Dados iniciais configurados com sucesso.
 
 Obter Dados Para Novo Usuario
-    [Arguments]    ${tipo}=user
-    ${user_data}=    Run Keyword If    '${tipo}' == 'admin'
-    ...    Gerar Dados Usuario Admin
-    ...    ELSE
-    ...    Gerar Dados Usuario Comum
+    [Arguments]    ${admin?}
+    IF  ${admin?} == 'admin'
+        ${user_data}=    Gerar Dados Usuario Admin  
+    ELSE
+        ${user_data}=    Gerar Dados Usuario Comum
+    END
     RETURN    ${user_data}
 
 Obter Dados Para Novo Produto

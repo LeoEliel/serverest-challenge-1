@@ -18,8 +18,12 @@ Gerar Dados Usuario
     ${nome}=    FakerLibrary.Name
     ${email}=   FakerLibrary.Email
     ${password}=    FakerLibrary.Password    length=8
-    ${administrador}=    Set Variable If    ${admin}    "true"    "false"
-    
+    IF    ${admin}
+        ${administrador}    Set Variable    true
+    ELSE
+        ${administrador}    Set Variable    false
+        
+    END    
     ${usuario_data}=    Create Dictionary
     ...    nome=${nome}
     ...    email=${email}
@@ -29,11 +33,11 @@ Gerar Dados Usuario
     RETURN    ${usuario_data}
 
 Gerar Dados Usuario Admin
-    ${admin_data}=    Gerar Dados Usuario    admin=true
+    ${admin_data}=    Gerar Dados Usuario    admin=True
     RETURN    ${admin_data}
 
 Gerar Dados Usuario Comum
-    ${user_data}=    Gerar Dados Usuario    admin=false
+    ${user_data}=    Gerar Dados Usuario    admin=False
     RETURN    ${user_data}
 
 Gerar Dados Produto
