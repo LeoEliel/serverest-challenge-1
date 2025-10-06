@@ -43,12 +43,13 @@ KAN-18 - Cadastrar Novo Produto com sucesso (Token Admin Requerido)
     E a mensagem é  Cadastro realizado com sucesso
 KAN-29 - Criar um Carrinho de Compras com Sucesso
     [Tags]    Carrinhos    Alta    Fluxo    KAN-29
+    [Teardown]    Excluir Carrinho e Produtos Criados
     Dado que o Token Admin é válido
     E o idProduto existe com quantidade em estoque suficiente
     Quando eu envio POST para /carrinhos com Token e dados válidos
     Então o status code é  201
     E a mensagem é  Cadastro realizado com sucesso
-    E a resposta contém o campo _id do produto
+    E a resposta contém o campo _id do carrinho
 
 KAN-37 - Concluir uma Compra (Excluir Carrinho)
     [Tags]    Carrinhos    Alta    Fluxo    KAN-37

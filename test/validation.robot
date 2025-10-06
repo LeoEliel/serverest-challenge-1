@@ -30,7 +30,7 @@ E a resposta contém o campo authorization
     ${campo}=    Get Value From Json    ${json_response}    $.authorization
     Should Not Be Empty    ${campo}
     Log To Console    Campo verificado: ${campo}
-    Armazenar Token Admin    ${campo}
+    Armazenar Token Admin    ${campo[0]}
 E a resposta contém o campo _id do administrador
     [Tags]    KAN-1    KAN-4    KAN-29
     ${response}=    Obter Response
@@ -38,7 +38,7 @@ E a resposta contém o campo _id do administrador
     ${campo}=    Get Value From Json    ${json_response}    $._id
     Should Not Be Empty    ${campo}
     Log To Console    Campo verificado: ${campo}
-    Armazenar ID Usuario Admin    ${campo}
+    Armazenar ID Usuario Admin    ${campo[0]}
 
 E a resposta contém o campo _id do produto
     [Tags]    KAN-18
@@ -46,7 +46,16 @@ E a resposta contém o campo _id do produto
     ${json_response}=    Convert String To Json    ${response.text}
     ${campo}=    Get Value From Json    ${json_response}    $._id
     Log To Console    ID do produto criado: ${campo}
-    Armazenar ID Produto    ${campo}
+    Armazenar ID Produto    ${campo[0]}
+
+E a resposta contém o campo _id do carrinho
+    [Tags]    KAN-29    KAN-37
+    ${response}=    Obter Response
+    ${json_response}=    Convert String To Json    ${response.text}
+    ${campo}=    Get Value From Json    ${json_response}    $._id
+    Should Not Be Empty    ${campo}
+    Log To Console    ID do carrinho criado: ${campo}
+    Armazenar ID Carrinho    ${campo[0]}
 
 # KAN-6 Validation Keywords
 E o corpo da resposta contém o _id e dados do usuário
@@ -89,5 +98,7 @@ E o estoque dos produtos é restaurado para X
     ${response}=    GET On Session    serverest    /produtos/${produto_id}    expected_status=200    msg=Falha ao buscar produto para verificar restauração do estoque
     ${json_response}=    Convert String To Json    ${response.text}
     ${quantidade_atual}=    Get Value From Json    ${json_response}    $.quantidade
-    Log    Quantidade Atual: ${quantidade_atual[0]}    |    Quantidade Inicial: ${GLOBAL_QTD_INICIAL}
-    Log To Console    Quantidade Atual: ${quantidade_atual[0]}    |    Quantidade Inicial: ${GLOBAL_QTD_INICIAL}
+    Log    Quantidade Atual: ${quantidade_atual[0]}
+    Log    Quantidade Inicial: ${GLOBAL_QTD_INICIAL}
+    Log To Console   Quantidade Atual: ${quantidade_atual[0]}
+    Log To Console   Quantidade Inicial: ${GLOBAL_QTD_INICIAL}
