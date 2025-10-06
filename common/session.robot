@@ -5,7 +5,7 @@ Library          String
 Library          JSONLibrary
 
 *** Variables ***
-${BASE_URL}             http://localhost:3000
+${BASE_URL}             http://3.83.23.41:3000
 
 *** Keywords ***
 Criar Sessão
